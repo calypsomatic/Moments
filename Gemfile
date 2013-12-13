@@ -31,8 +31,11 @@ gem 'jbuilder', '~> 1.2'
 # for making users
 gem 'devise'
 
-#for making forms
+# for making forms
 gem 'simple_form'
+
+# for displaying calendars
+gem 'simple_calendar'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -1,11 +1,11 @@
 require 'spec_helper'
 include Warden::Test::Helpers
 
-feature 'User logs in' 
-
 # User home page should contain personal calendar
 # and links to universal calendar
 # and either a link or a form for adding today's moment
+
+feature 'User logs in' do
 
   scenario "User sees that they're logged in" do
     user = FactoryGirl.create(:user)
