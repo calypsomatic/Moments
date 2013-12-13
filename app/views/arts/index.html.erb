@@ -1,0 +1,29 @@
+<h1>Listing arts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Moment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @arts.each do |art| %>
+      <tr>
+        <td><%= art.user_id %></td>
+        <td><%= art.moment_id %></td>
+        <td><%= link_to 'Show', art %></td>
+        <td><%= link_to 'Edit', edit_art_path(art) %></td>
+        <td><%= link_to 'Destroy', art, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Art', new_art_path %>
