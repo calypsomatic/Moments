@@ -1,10 +1,8 @@
-<!-- Should display today's date at the top-->
-<!-- Need ability to add moment for a previous date, however-->
-
-<h1>Today's date here</h1>
+<h1><%= Time.now.strftime("%a %B %d, %Y") %></h1>
 
 <%= simple_form_for @moment do |form| %>
   <%= form.input :sentence, label: 'Today I...' %>
+  <%= form.input :day %>
   <%= form.button :submit %>
 <%- end %>
 

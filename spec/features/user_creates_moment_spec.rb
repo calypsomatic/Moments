@@ -29,4 +29,16 @@ feature 'User creates a moment' do
     expect(Moment.count).to be >(prev_mom)
   end
 
+  scenario "User enter's today's moment" do
+    # moment = FactoryGirl.create(:moment, user: user, day: Time.new)
+    # expect(moment.day).to be today's date
+  end
+
+  scenario "User creates moment for a different day" do
+    # click_link Choose a different day
+    # see option for days
+    # somehow delineate which days have already been momented
+    # moment.day = that day
+  end
+
 end
