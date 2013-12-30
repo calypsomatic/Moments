@@ -37,6 +37,9 @@ gem 'simple_form'
 # for displaying calendars
 gem 'simple_calendar'
 
+# for making a grid calendar
+gem 'foundation-rails'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -46,12 +49,17 @@ group :development, :test do
   #gem 'sqlite3', '1.3.8' # suggested by Hartl tutorial
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'spork-rails', '4.0.0' # to speed up tests, suggested by Hartl
+  gem 'guard-spork', '1.5.0' # to speed up tests, suggested by Hartl
+  gem 'childprocess', '0.3.6' # to speed up tests, suggested by Hartl
+  gem 'guard-rspec', '2.5.0' # for automated tests, suggested by Hartl
 end
 
 group :test do
   gem 'shoulda'
   gem 'capybara'
   gem 'selenium-webdriver', '2.35.1' # suggested by Hartl tutorial
+  gem 'libnotify', '0.8.0' # suggested by Hartl
 end
 
 #suggested by Hartl tutorial

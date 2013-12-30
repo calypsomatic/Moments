@@ -5,14 +5,9 @@
 
 <p>
   <strong>On</strong>
-  <%= @moment.day %>
+  <%= @moment.day.strftime("%A %B %d, %Y") %>
   I
   <%= @moment.sentence %>
-</p>
-
-<p>
-  <strong>Day:</strong>
-  <%= @moment.day %>
 </p>
 
 <%= link_to 'Edit', edit_moment_path(@moment) %> |

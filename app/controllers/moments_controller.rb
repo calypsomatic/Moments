@@ -1,10 +1,11 @@
 class MomentsController < ApplicationController
   before_action :set_moment, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /moments
   # GET /moments.json
   def index
-    @moments = Moment.all
+    @moments = Moment.makeMomentMonth(current_user)
   end
 
   # GET /moments/1

@@ -1,32 +1,45 @@
 <!--Moments index should be in calendar form-->
 <!--With either link or form to submit today's moment-->
 
-<h1>Listing moments</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Sentence</th>
-      <th>Day</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @moments.each do |moment| %>
-      <tr>
-        <td><%= moment.sentence %></td>
-        <td><%= moment.day %></td>
-        <td><%= link_to 'Show', moment %></td>
-        <td><%= link_to 'Edit', edit_moment_path(moment) %></td>
-        <td><%= link_to 'Destroy', moment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="calendar">
+  <div class="calendar-header">
+    <h3><%= @moments.first.date.strftime("%B %Y") %></h3>
+    </div>
+    <div class="day-header">
+    <h4> Sunday </h4>
+    </div>
+    <div class="day-header">
+    <h4> Monday </h4>
+    </div>
+    <div class="day-header">
+    <h4> Tuesday </h4>
+    </div>
+    <div class="day-header">
+    <h4> Wednesday </h4>
+    </div>
+    <div class="day-header">
+    <h4> Thursday </h4>
+    </div>
+    <div class="day-header">
+    <h4> Friday </h4>
+    </div>
+    <div class="day-header">
+    <h4> Saturday </h4>
+    </div>
+    <% for i in 0..@moments.first.date.wday-1 %>
+      <div class="blank-calendar-day"></div>
     <% end %>
-  </tbody>
-</table>
+    <% @moments.each do |calDay| %>
+      <div class="calendar-day">
+        <p class="date-header"><%= calDay.date.strftime("%-d") %></p>
+        <% if calDay.moment.present? %>
+          <p class="sentence"><%= calDay.moment.sentence %></p>
+        <% end %>
+      </div>
+    <% end %>
+</div>
 
-<br>
 
 <%= link_to "Add today's moment", new_moment_path %>
+<%= link_to "Home", root_path %>

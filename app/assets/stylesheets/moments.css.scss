@@ -1,3 +1,44 @@
 // Place all the styles related to the Moments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.calendar-day {
+  height: 100px;
+  width: 100px;
+  margin: 5px;
+  display: inline-block;
+  border: 1px solid black;
+}
+
+.calendar {
+  width: 850px;
+}
+
+.date-header {
+  display: inline;
+  text-align: right;
+}
+
+.sentence {
+  display: inline;
+}
+
+.calendar-header {
+  width: 700px;
+  text-align: center;
+}
+
+.day-header {
+  width: 100px;
+  height: 20px;
+  margin: 5px;
+  text-align: center;
+  display: inline-block;
+}
+
+.blank-calendar-day {
+  height: 100px;
+  width: 100px;
+  margin: 6px;
+  display: inline-block;
+}
