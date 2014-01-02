@@ -41,6 +41,8 @@
       <p class="date-header"><%= calDay.date.strftime("%-d") %></p>
       <% if calDay.moment.present? %>
         <p class="sentence"><%= calDay.moment.sentence %></p>
+      <% else %>
+        <%= link_to "Add moment to this day", new_moment_path(date: calDay.date) %>
       <% end %>
     </div>
   <% end %>
@@ -52,7 +54,6 @@
 </div>
 
 <%= link_to "Next month", moments_path(date: @moments.first.date.next_month) %>
-
-
-<%= link_to "Add today's moment", new_moment_path %>
+<p></p>
+<%= link_to "Add today's moment", new_moment_path(date: Date.today) %>
 <%= link_to "Home", root_path %>

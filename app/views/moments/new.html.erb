@@ -1,9 +1,11 @@
-<h1><%= Time.now.strftime("%a %B %d, %Y") %></h1>
+<% moment_date = Chronic.parse(params[:date]).try(:to_date) %>
+
+<h2><%= moment_date.strftime("%a %B %d, %Y") %></h2>
 
 <%= simple_form_for @moment do |form| %>
   <%= form.input :sentence, label: 'Today I...', input_html: { size: 100 } %>
-  <%= form.input :day %>
+  <%= form.input :day, default: moment_date %>
   <%= form.button :submit %>
 <%- end %>
 
-<%= link_to 'Back', moments_path %>
+<%= link_to 'Back', moments_path(date: moment_date) %>

@@ -30,7 +30,7 @@ class MomentsController < ApplicationController
 
     respond_to do |format|
       if @moment.save
-        format.html { redirect_to @moment, notice: 'Moment was successfully created.' }
+        format.html { redirect_to action: 'index', notice: 'Moment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @moment }
       else
         format.html { render action: 'new' }
