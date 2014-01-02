@@ -5,9 +5,10 @@ class MomentsController < ApplicationController
   # GET /moments
   # GET /moments.json
   def index
-    @moments = Moment.makeMomentMonth(current_user)
+    date = Chronic.parse(params[:date]).try(:to_date)
+    @moments = Moment.makeMomentMonth(current_user, date: date)
   end
-
+  
   # GET /moments/1
   # GET /moments/1.json
   def show
@@ -25,7 +26,7 @@ class MomentsController < ApplicationController
   # POST /moments
   # POST /moments.json
   def create
-    @moment = Moment.new(moment_params)
+    @moment = current_user.moments.new(moment_params)
 
     respond_to do |format|
       if @moment.save
@@ -60,10 +61,6 @@ class MomentsController < ApplicationController
       format.html { redirect_to moments_url }
       format.json { head :no_content }
     end
-  end
-
-  def calendar
-    @moments = Moment.all
   end
   
   private

@@ -11,8 +11,19 @@ describe Moment do
       expect(first).to be_a(CalendarDay)
     end
 
-    it 'returns a calendar-day with correct date' do
-      expect(first.date).to eq(Date.today.beginning_of_month)
+    context 'no date is passed in' do
+      it 'returns a calendar-day with dates in current month' do
+        expect(first.date).to eq(Date.today.beginning_of_month)
+      end
+    end
+
+    context 'a date is passed in' do
+      it 'returns a calendar-day with dates in parameter month' do
+        lastmonth = Date.today.prev_month.beginning_of_month
+        lastmontharray = Moment.makeMomentMonth(user, date: lastmonth)
+        arrayfirst = lastmontharray.first
+        expect(arrayfirst.date).to eq(lastmonth.beginning_of_month)
+      end
     end
 
     context 'one of the calendar-days has a moment' do

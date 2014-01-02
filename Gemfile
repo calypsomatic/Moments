@@ -40,6 +40,9 @@ gem 'simple_calendar'
 # for making a grid calendar
 gem 'foundation-rails'
 
+# for making strings into things
+gem 'chronic'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Moments" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -12,6 +12,21 @@
   </head>
 
   <body>
+    <div class="row">
+      <div class="twelve columns">
+        <% if flash[:error] %>
+          <div class="error"><%= flash[:error] %></div>
+        <% end %>
+
+        <%if flash[:notice] %>
+          <div class="notice"><%= flash[:notice] %></div>
+        <% end %>
+
+        <%if flash[:alert] %>
+          <div class="alert"><%= flash[:alert] %></div>
+        <% end %>
+      </div><!-- //.twelve.columns -->
+    </div><!-- //.row -->
 
     <%= yield %>
     <%= javascript_include_tag "application" %>

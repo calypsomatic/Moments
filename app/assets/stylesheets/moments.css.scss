@@ -2,43 +2,47 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.calendar-day {
-  height: 100px;
-  width: 100px;
-  margin: 5px;
-  display: inline-block;
-  border: 1px solid black;
-}
+ .calendar-day {
+   height: 100px;
+// //   width: 100px;
+// //   margin: 5px;
+// //   display: inline-block;
+   border: 1px solid black;
+ }
 
-.calendar {
-  width: 850px;
-}
+ .blank-day {
+   height: 100px;
+ }
 
-.date-header {
-  display: inline;
-  text-align: right;
-}
+// .calendar {
+//   width: 850px;
+// }
 
-.sentence {
-  display: inline;
-}
+// .date-header {
+//   display: inline;
+//   //text-align: right;
+// }
 
-.calendar-header {
-  width: 700px;
-  text-align: center;
-}
+// .sentence {
+//   display: inline;
+// }
 
-.day-header {
-  width: 100px;
-  height: 20px;
-  margin: 5px;
-  text-align: center;
-  display: inline-block;
-}
+// //.calendar-header {
+// //  width: 700px;
+// //  text-align: center;
+// //}
 
-.blank-calendar-day {
-  height: 100px;
-  width: 100px;
-  margin: 6px;
-  display: inline-block;
-}
+// //.day-header {
+// // width: 100px;
+// //  height: 20px;
+// // margin: 5px;
+// //  text-align: center;
+// //  display: inline-block;
+// //}
+
+// .blank-calendar-day {
+//   height: 100px;
+//   width: 100px;
+//   margin: 6px;
+//   display: inline-block;
+// }
