@@ -1,25 +1,16 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a practice project developed while learning Ruby on Rails.
+It is very unfinished.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+The idea of the Moments app is a collaborative art project.  
+Users would capture a moment of their lives each day by entering
+a sentence that represents something they did that day that
+stood out, or perhaps that summarizes the day itself.
+These sentences then appear in both a personal and universal calendar.
+Users can view others' moments in the universal calendar,
+and choose to 'artify' a moment by illustration, poem, song, or
+what-have-you.
 
 * ...
 

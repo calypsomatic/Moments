@@ -58,3 +58,4 @@
 <%= link_to "Add today's moment", new_moment_path(date: Date.today) %>
 <%= link_to "View universal calendar", moments_universal_path(date: @moments.first.date) %>
 <%= link_to "Home", root_path %>
+<%= link_to('Log out', destroy_user_session_path, :method => :delete) %>

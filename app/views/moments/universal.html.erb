@@ -1,3 +1,4 @@
+
 <%= link_to "Previous month", moments_path(date: @moments.first.date.prev_month) %>
 
 <h3>Universal Calendar</h3>
@@ -41,7 +42,12 @@
     <div class="calendar-day medium-2 columns">
       <p class="date-header"><%= calDay.date.strftime("%-d") %></p>
       <% if calDay.moment.present? %>
-        <p class="sentence"><%= calDay.moment.sentence %></p>
+        <% calDay.moment.each do |mom| %>
+          <class="sentence"><%= mom.sentence %>
+          <% if not mom.art_claimed %>
+            <%= link_to "artify this moment", moment_path(mom) %>
+          <% end %>
+        <% end %>
       <% else %>
         <%= link_to "Add moment to this day", new_moment_path(date: calDay.date) %>
       <% end %>

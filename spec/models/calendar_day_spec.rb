@@ -26,4 +26,14 @@ describe CalendarDay do
     end
   end
 
+  context 'with multiple moments' do
+    it 'contains a collection of moments' do
+      moment = FactoryGirl.create(:moment, day: today, sentence: "first sentence")
+      moment2 = FactoryGirl.create(:moment, day: today, sentence: "second sentence")
+      calDay.find_moment
+      expect(calDay.moment.first).to be_a(Moment)
+      expect(calDay.moment.first.sentence).to eq("first sentence")
+    end
+  end
+
 end

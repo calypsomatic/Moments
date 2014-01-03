@@ -14,12 +14,20 @@ feature 'User creates an art' do
     Warden.test_reset!
   end
 
-  scenario 'User sees universal calendar' do
-    # this may not be where link comes from
+  scenario 'User sees un-artified moment on universal calendar' do
+    empty_moment = FactoryGirl.create(:moment, day: Date.today)
+    visit moments_universal_path(date: Date.today)
+    expect(page).to have_content("artify")
   end
 
   scenario 'User selects moment to art' do
-    # moments that are not arted should have option available
+    empty_moment = FactoryGirl.create(:moment, day: Date.today)
+    visit moments_universal_path(date: Date.today)
+    expect(page).to have_content("artify")
+    click_link "artify this moment"
+    expect(empty_moment.art_claimed).to be true
+    new_art = Art.find_by(id: empty_moment.art_id) #clearly this is incorrect
+    expect(new_art.user_id).to eq(user.id)
     # that moment's art should be assigned to this user
     # user has art_in_progress boolean toggled to true
     # countdown begins until art must be submitted

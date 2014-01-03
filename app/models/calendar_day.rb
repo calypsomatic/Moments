@@ -10,7 +10,7 @@ class CalendarDay
     if user.present?
       @moment = Moment.find_by(user_id: user.id, day: @date)
     else
-      @moment = Moment.find_by(day: @date)
+      @moment = Moment.where(day: @date)
     end
   end
 
