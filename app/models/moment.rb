@@ -6,7 +6,7 @@ class Moment < ActiveRecord::Base
   validates :user, presence: true
 
   class << self
-    def makeMomentMonth(user, options = {})
+    def makeMomentMonth(options = {})
       start_day = options[:date]
 
       start_day ||= -> { Date.today.beginning_of_month }.call
@@ -14,7 +14,11 @@ class Moment < ActiveRecord::Base
 
       (start_day.beginning_of_month..start_day.end_of_month).each do |day|
         calDay = CalendarDay.new(day)
-        calDay.find_moment(user)
+        if options[:user].present?
+          calDay.find_moment(options[:user])
+        else
+          calDay.find_moment
+        end
         day_array << calDay
       end
 

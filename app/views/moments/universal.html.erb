@@ -1,5 +1,6 @@
 <%= link_to "Previous month", moments_path(date: @moments.first.date.prev_month) %>
 
+<h3>Universal Calendar</h3>
 <div class="calendar">
   <div class="calendar-header row">
     <h3 class="medium-4 medium-centered columns"><%= @moments.first.date.strftime("%B %Y") %></h3>
@@ -56,5 +57,5 @@
 <%= link_to "Next month", moments_path(date: @moments.first.date.next_month) %>
 <p></p>
 <%= link_to "Add today's moment", new_moment_path(date: Date.today) %>
-<%= link_to "View universal calendar", moments_universal_path(date: @moments.first.date) %>
+<%= link_to "View personal calendar", moments_path(date: @moments.first.date) %>
 <%= link_to "Home", root_path %>
