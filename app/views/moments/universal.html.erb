@@ -1,10 +1,10 @@
 
-<%= link_to "Previous month", moments_path(date: @moments.first.date.prev_month) %>
+<%= link_to "Previous month", moments_path(date: @cal_days.first.date.prev_month) %>
 
 <h3>Universal Calendar</h3>
 <div class="calendar">
   <div class="calendar-header row">
-    <h3 class="medium-4 medium-centered columns"><%= @moments.first.date.strftime("%B %Y") %></h3>
+    <h3 class="medium-4 medium-centered columns"><%= @cal_days.first.date.strftime("%B %Y") %></h3>
   </div>
   <div class="day-header row">
     <div class="medium-2 columns">
@@ -30,22 +30,22 @@
     </div>
   </div>
   <div class ="row">
-  <% firstday = @moments.first.date.wday %>
+  <% firstday = @cal_days.first.date.wday %>
   <% firstday.times do %>
     <div class="blank-day medium-2 columns"></div>
   <% end %>
-  <% @moments.each_with_index do |calDay, index| %>
+  <% @cal_days.each_with_index do |calDay, index| %>
     <% if index % 7 == firstday+1 %>
       </div>
       <div class="row">
     <% end %>
     <div class="calendar-day medium-2 columns">
       <p class="date-header"><%= calDay.date.strftime("%-d") %></p>
-      <% if calDay.moment.present? %>
-        <% calDay.moment.each do |mom| %>
-          <class="sentence"><%= mom.sentence %>
-          <% if not mom.art_claimed %>
-            <%= link_to "artify this moment", moment_path(mom) %>
+      <% if calDay.moments.present? %>
+        <% calDay.moments.each do |moment| %>
+          <class="sentence"><%= moment.sentence %>
+          <% if not moment.art_claimed? and moment.user_id != current_user.id %>
+            <%= link_to "artify this moment", moment_path(moment) %>
           <% end %>
         <% end %>
       <% else %>
@@ -53,15 +53,15 @@
       <% end %>
     </div>
   <% end %>
-  <% lastday = @moments.last.date.wday %>
+  <% lastday = @cal_days.last.date.wday %>
   <% (6-lastday).times do %>
      <div class="blank-day medium-2 columns"></div>
   <% end %>
   </div>
 </div>
 
-<%= link_to "Next month", moments_path(date: @moments.first.date.next_month) %>
+<%= link_to "Next month", moments_path(date: @cal_days.first.date.next_month) %>
 <p></p>
 <%= link_to "Add today's moment", new_moment_path(date: Date.today) %>
-<%= link_to "View personal calendar", moments_path(date: @moments.first.date) %>
+<%= link_to "View personal calendar", moments_path(date: @cal_days.first.date) %>
 <%= link_to "Home", root_path %>

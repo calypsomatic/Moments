@@ -13,16 +13,16 @@ describe CalendarDay do
       moment = FactoryGirl.create(:moment, day: today)
       user = moment.user
       calDay.find_moment(user)
-      expect(calDay.moment).to be_a(Moment)
-      expect(calDay.moment.day).to eq(calDay.date)
+      expect(calDay.moments.first).to be_a(Moment)
+      expect(calDay.moments.first.day).to eq(calDay.date)
     end
   end
 
   context 'without a moment' do
-    it 'returns nil' do
+    it 'returns an empty collection' do
       user = FactoryGirl.create(:user)
       calDay.find_moment(user)
-      expect(calDay.moment).to be_nil
+      expect(calDay.moments).to be_empty
     end
   end
 
@@ -31,8 +31,8 @@ describe CalendarDay do
       moment = FactoryGirl.create(:moment, day: today, sentence: "first sentence")
       moment2 = FactoryGirl.create(:moment, day: today, sentence: "second sentence")
       calDay.find_moment
-      expect(calDay.moment.first).to be_a(Moment)
-      expect(calDay.moment.first.sentence).to eq("first sentence")
+      expect(calDay.moments.first).to be_a(Moment)
+      expect(calDay.moments.first.sentence).to eq("first sentence")
     end
   end
 

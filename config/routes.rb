@@ -1,11 +1,12 @@
 Moments::Application.routes.draw do
-  resources :arts
-
   get "static_pages/home"
   get "static_pages/help"
   get "static_pages/about"
   get "moments/universal"
-  resources :moments
+  
+  resources :moments do
+    resources :arts
+  end
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

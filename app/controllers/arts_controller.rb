@@ -4,7 +4,8 @@ class ArtsController < ApplicationController
   # GET /arts
   # GET /arts.json
   def index
-    @arts = Art.all
+    @moment = Moment.find(params[:moment_id])
+    @arts = current_user.arts.where(moment_id: @moment.id)
   end
 
   # GET /arts/1
@@ -15,6 +16,7 @@ class ArtsController < ApplicationController
   # GET /arts/new
   def new
     @art = Art.new
+    @moment = params[:moment]
   end
 
   # GET /arts/1/edit
@@ -25,11 +27,11 @@ class ArtsController < ApplicationController
   # POST /arts.json
   def create
     @art = Art.new(art_params)
+    @moment = @art.moment
 
     respond_to do |format|
       if @art.save
-        format.html { redirect_to @art, notice: 'Art was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @art }
+        format.html { redirect_to moment_art_path(@moment, @art), notice: 'Art was successfully created.' }
       else
         format.html { render action: 'new' }
         format.json { render json: @art.errors, status: :unprocessable_entity }

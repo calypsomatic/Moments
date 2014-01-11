@@ -1,14 +1,27 @@
 <!--Moments should be viewable but not editable by non-owned users-->
 <!--Moment should have add-art option, but this is not available to moment's owner-->
-
+<% viewing_own_moment = (current_user.id == @moment.user_id) %>
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>On</strong>
   <%= @moment.day.strftime("%A %B %d, %Y") %>
-  I
+  <% if viewing_own_moment %>
+    I
+  <% else %>
+    <% moment_user = User.find_by(id: @moment.user_id) %>
+    <%= moment_user.email %>
+  <% end %>
   <%= @moment.sentence %>
 </p>
 
-<%= link_to 'Edit', edit_moment_path(@moment) %> |
+<% if !viewing_own_moment %>
+  <%= simple_form_for [@moment, @art] do |form| %>
+    <%= form.input :user_id, as: :hidden %>
+    <%= form.input :moment_id, as: :hidden %>
+    <%= form.button :submit, "Claim this moment's art?"%>
+  <%- end %>
+<% end %>
+
+<%= link_to 'Edit', edit_moment_path(@moment) %>
 <%= link_to 'Back', moments_path %>

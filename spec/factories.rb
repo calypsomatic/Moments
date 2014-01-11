@@ -10,4 +10,9 @@ FactoryGirl.define do
     day Date.today
     user
   end
+
+  factory :art do
+    user
+    moment_id 1
+  end
 end

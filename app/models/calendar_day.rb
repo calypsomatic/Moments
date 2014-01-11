@@ -1,6 +1,6 @@
 class CalendarDay
 
-  attr_reader :date, :moment
+  attr_reader :date, :moments
 
   def initialize(date)
     @date = date
@@ -8,9 +8,9 @@ class CalendarDay
 
   def find_moment(user = nil)
     if user.present?
-      @moment = Moment.find_by(user_id: user.id, day: @date)
+      @moments = Moment.where(user_id: user.id, day: @date)
     else
-      @moment = Moment.where(day: @date)
+      @moments = Moment.where(day: @date)
     end
   end
 

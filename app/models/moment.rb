@@ -1,7 +1,7 @@
 class Moment < ActiveRecord::Base
 
   belongs_to :user, inverse_of: :moments
-  has_one :art, inverse_of: :moments
+  has_one :art, inverse_of: :moment
 
   validates :user, presence: true
 
@@ -23,6 +23,15 @@ class Moment < ActiveRecord::Base
       end
 
       day_array
+    end
+  end
+
+  def art_claimed?
+    art = Art.find_by(moment_id: self.id)
+    if art == nil
+      return false
+    else
+      return true
     end
   end
 

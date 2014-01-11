@@ -2,6 +2,10 @@ require 'spec_helper'
 include Warden::Test::Helpers
 
 describe Moment do
+
+  it { should have_one(:art) }
+  it { should belong_to(:user) }
+
   describe "displaying moments in a month" do
     let(:user) { FactoryGirl.create(:user) }
     let(:month) { Moment.makeMomentMonth(user: user) }
@@ -40,13 +44,13 @@ describe Moment do
       it 'returns a calendar-day that has a moment' do
         moment = FactoryGirl.create(:moment, user: user, day: Date.today.beginning_of_month)
         firstDay = Moment.makeMomentMonth(user: user).first
-        expect(firstDay.moment).to be_a(Moment)
+        expect(firstDay.moments.first).to be_a(Moment)
       end
     end
 
     context 'one of the calendar-days does not have a moment' do
-      it 'returns a calendar-day with nil for a moment' do
-        expect(first.moment).to be_nil
+      it 'returns a calendar-day with an empty collection' do
+        expect(first.moments).to be_empty
       end
     end
 
@@ -59,14 +63,25 @@ describe Moment do
       it "returns an array with other user's moments" do
         user2_moment = FactoryGirl.create(:moment, user: user2, day: test_date, sentence: test_sentence)
         universal_month = Moment.makeMomentMonth
-        first_test = universal_month.first
-        expect(first_test.date).to eq(test_date)
-        expect(first_test).to be_a(CalendarDay)
-        expect(first_test.moment).to be_a(Moment)
-        expect(first_test.moment.sentence).to eq(test_sentence)
+        calendar_day = universal_month.first
+        expect(calendar_day.date).to eq(test_date)
+        expect(calendar_day).to be_a(CalendarDay)
+        expect(calendar_day.moments.first).to be_a(Moment)
+        expect(calendar_day.moments.first.sentence).to eq(test_sentence)
       end
     end
 
+  end
+
+  let(:moment) { FactoryGirl.create(:moment) }
+
+  it 'returns false if art is not claimed' do
+    expect(moment.art_claimed?).to eq(false)
+  end
+
+  it 'returns true if art is claimed' do
+    art = FactoryGirl.create(:art, moment_id: moment.id)
+    expect(moment.art_claimed?).to eq(true)
   end
 
 end

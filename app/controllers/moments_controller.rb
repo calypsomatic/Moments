@@ -6,12 +6,13 @@ class MomentsController < ApplicationController
   # GET /moments.json
   def index
     date = Chronic.parse(params[:date]).try(:to_date)
-    @moments = Moment.makeMomentMonth(user: current_user, date: date)
+    @cal_days = Moment.makeMomentMonth(user: current_user, date: date)
   end
   
   # GET /moments/1
   # GET /moments/1.json
   def show
+    @art = @moment.build_art(user: current_user)
   end
 
   # GET /moments/new
@@ -25,7 +26,7 @@ class MomentsController < ApplicationController
 
   def universal
     date = Chronic.parse(params[:date]).try(:to_date)
-    @moments = Moment.makeMomentMonth(date: date)
+    @cal_days = Moment.makeMomentMonth(date: date)
   end
 
   # POST /moments

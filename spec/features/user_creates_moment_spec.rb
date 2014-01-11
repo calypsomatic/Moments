@@ -21,7 +21,7 @@ feature 'User creates a moment' do
   end
 
   scenario 'User sees moment is added' do
-    visit new_moment_path
+    visit new_moment_path(date: Date.today)
     fill_in 'Today I...', with: 'did a thing'
     prev_mom = Moment.count
     click_button 'Create Moment'
