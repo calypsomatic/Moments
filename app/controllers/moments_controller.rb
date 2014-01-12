@@ -32,15 +32,14 @@ class MomentsController < ApplicationController
   # POST /moments
   # POST /moments.json
   def create
-    @moment = current_user.moments.new(moment_params)
+    @moment = current_user.moments.build(moment_params)
 
     respond_to do |format|
       if @moment.save
-        format.html { redirect_to action: 'index', notice: 'Moment was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @moment }
+        flash[:notice] = "Moment was successfully created"
+        format.html { redirect_to action: 'index' }
       else
         format.html { render action: 'new' }
-        format.json { render json: @moment.errors, status: :unprocessable_entity }
       end
     end
   end

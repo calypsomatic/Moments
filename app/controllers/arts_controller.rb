@@ -31,7 +31,7 @@ class ArtsController < ApplicationController
 
     respond_to do |format|
       if @art.save
-        format.html { redirect_to moment_art_path(@moment, @art), notice: 'Art was successfully created.' }
+        format.html { redirect_to moment_art_path(@moment, @art), notice: "You have claimed this moment's art!" }
       else
         format.html { render action: 'new' }
         format.json { render json: @art.errors, status: :unprocessable_entity }
