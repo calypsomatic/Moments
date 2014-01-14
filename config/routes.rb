@@ -8,6 +8,10 @@ Moments::Application.routes.draw do
     resources :arts
   end
 
+  resources :arts, only: [:index]
+
+
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

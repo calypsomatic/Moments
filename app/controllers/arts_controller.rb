@@ -4,8 +4,9 @@ class ArtsController < ApplicationController
   # GET /arts
   # GET /arts.json
   def index
-    @moment = Moment.find(params[:moment_id])
-    @arts = current_user.arts.where(moment_id: @moment.id)
+    #@moment = Moment.find(params[:moment_id])
+    #@arts = current_user.arts.where(moment_id: @moment.id)
+    @arts = Art.where(user: current_user)
   end
 
   # GET /arts/1
@@ -28,9 +29,12 @@ class ArtsController < ApplicationController
   def create
     @art = Art.new(art_params)
     @moment = @art.moment
+    @in_progress = Art.in_progress?(current_user)
 
     respond_to do |format|
-      if @art.save
+      if @in_progress
+        format.html { redirect_to moment_path(@moment), notice: "You already have an art in progress" }
+      elsif @art.save
         format.html { redirect_to moment_art_path(@moment, @art), notice: "You have claimed this moment's art!" }
       else
         format.html { render action: 'new' }

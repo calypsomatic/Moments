@@ -35,15 +35,27 @@ feature 'User creates an art' do
     expect(page).to have_content("claimed")
     empty_moment.reload
     expect(empty_moment.art).to be_an(Art)
-    # user has art_in_progress boolean toggled to true
+    expect(Art.in_progress?(user)).to be_true
     # countdown begins until art must be submitted
   end
 
+  scenario 'User already has an art in progress' do
+    empty_moment = FactoryGirl.create(:moment, day: Date.today)
+    art = FactoryGirl.create(:art, user: user)
+    visit moment_path(empty_moment)
+    click_button "Claim this moment's art?"
+    expect(page).to have_content('You already have an art in progress')
+  end
+
   scenario 'User submits art' do
-    # user must return to page
-    # user must click button
-    # user's art_in_progress boolean toggled to false
-    # art uploaded and stored assigned to moment 
+    moment = FactoryGirl.create(:moment)
+    art = FactoryGirl.create(:art, moment: moment, user: user)
+    visit root_path
+    click_link 'View your art in progress'
+    expect(page).to have_button('Upload your art')
+    # how do i upload things??
+    #expect(art.in_progress).to be_false
+    #expect art to be uploaded
   end
 
   scenario 'Time is up' do

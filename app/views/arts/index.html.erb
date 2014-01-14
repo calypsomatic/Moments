@@ -2,14 +2,13 @@
     and have its moment written above it
     and two users listed-->
 
-<h1>Listing arts</h1>
+<h1>Your arts</h1>
 
 <table>
   <thead>
     <tr>
-      <th>User</th>
       <th>Moment</th>
-      <th></th>
+      <th>Complete</th>
       <th></th>
       <th></th>
     </tr>
@@ -18,17 +17,20 @@
   <tbody>
     <% @arts.each do |art| %>
       <tr>
-        <td><%= art.user_id %></td>
-        <td><%= art.moment_id %></td>
-        <td><%= link_to 'Show', art %></td>
-        <td><%= link_to 'Edit', edit_art_path(art) %></td>
-        <td><%= link_to 'Destroy', art, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% if art.moment.present? %>
+              <%= art.moment.sentence %>
+            <% end %></td>
+        <td><% if art.in_progress %>
+              Not yet
+              <% else %>
+              Yes
+              <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= @moment.day %>
 <br>
 
 <%= link_to "Home", root_path %>
