@@ -1,5 +1,6 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /arts
   # GET /arts.json
@@ -12,6 +13,8 @@ class ArtsController < ApplicationController
   # GET /arts/1
   # GET /arts/1.json
   def show
+    @moment = Moment.find(params[:moment_id])
+    @art = Art.find(params[:id])
   end
 
   # GET /arts/new
@@ -48,7 +51,7 @@ class ArtsController < ApplicationController
   def update
     respond_to do |format|
       if @art.update(art_params)
-        format.html { redirect_to @art, notice: 'Art was successfully updated.' }
+        format.html { redirect_to moment_art_path(@art.moment, @art), notice: 'Your art is uploaded now.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -62,7 +65,7 @@ class ArtsController < ApplicationController
   def destroy
     @art.destroy
     respond_to do |format|
-      format.html { redirect_to arts_url }
+      format.html { redirect_to arts_url, notice: 'You have relinquished this moment' }
       format.json { head :no_content }
     end
   end

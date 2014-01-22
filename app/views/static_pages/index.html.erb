@@ -6,6 +6,12 @@
 <%= link_to('Your moments', moments_path) %>
 <%= link_to('Your arts', arts_path) %>
 <%= link_to "Add today's moment", new_moment_path(date: Date.today) %>
+<% if current_user.present? %>
+    <% current_art = current_user.arts.in_progress.first %>
+    <% if current_art.present? %>
+      <%= link_to "View your art in progress", moment_art_path(current_art.moment, current_art) %>
+  <% end %>
+<% end %>
 <%= link_to('Log in', new_user_session_path) %>
 <%= link_to('Log out', destroy_user_session_path, :method => :delete) %>
 <%= link_to 'About', static_pages_about_path %>

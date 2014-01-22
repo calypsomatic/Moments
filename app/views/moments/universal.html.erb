@@ -43,7 +43,7 @@
       <p class="date-header"><%= calDay.date.strftime("%-d") %></p>
       <% if calDay.moments.present? %>
         <% calDay.moments.each do |moment| %>
-          <class="sentence"><%= moment.sentence %>
+          <class="sentence"><%= link_to "%{moment}" % {:moment => moment.sentence}, moment_path(moment) %>
           <% if not moment.art_claimed? and moment.user_id != current_user.id %>
             <%= link_to "artify this moment", moment_path(moment) %>
           <% end %>

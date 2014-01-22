@@ -15,12 +15,14 @@
   <%= @moment.sentence %>
 </p>
 
-<% if !viewing_own_moment %>
-  <%= simple_form_for [@moment, @art] do |form| %>
-    <%= form.input :user_id, as: :hidden %>
-    <%= form.input :moment_id, as: :hidden %>
-    <%= form.button :submit, "Claim this moment's art?"%>
-  <%- end %>
+<% if @moment.art.present? %>
+  <p>This moment has an art</p>
+  <% elsif !viewing_own_moment %>
+    <%= simple_form_for [@moment, @art] do |form| %>
+      <%= form.input :user_id, as: :hidden %>
+      <%= form.input :moment_id, as: :hidden %>
+      <%= form.button :submit, "Claim this moment's art?"%>
+    <%- end %>
 <% end %>
 
 <%= link_to 'Edit', edit_moment_path(@moment) %>

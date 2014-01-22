@@ -1,0 +1,26 @@
+<p>
+  <h3>Your art</h3>
+  <% if @art.in_progress? %>
+    <h5> currently in progress </h5>
+  <% end %>
+  On
+  <% if @moment.present? %>
+    <%= @moment.day.strftime("%A %B %d, %Y") %>
+    <% moment_user = User.find_by(id: @moment.user_id) %>
+    <%= moment_user.email %>
+    <%= @moment.sentence %>
+  <% end %>
+</p>
+<% if Art.in_progress?(current_user) %>
+    <%= simple_form_for [@moment, @art] do |form| %>
+      <%= form.input :grabby, label: "Put art" %>
+      <%= form.button :submit, "Upload your art"%>
+    <%- end %>
+    <%= link_to 'Cancel your claim', moment_art_path(@moment, @art), :method => :delete %>
+<% end %>
+<p>
+<% if @moment.present? %>
+  <%= link_to 'Edit', edit_moment_art_path(@moment, @art) %>
+<% end %>
+<%= link_to 'Back', moments_path %>
+</p>
