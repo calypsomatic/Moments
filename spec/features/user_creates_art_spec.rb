@@ -31,7 +31,7 @@ feature 'User creates an art' do
     empty_moment = FactoryGirl.create(:moment, day: Date.today)
     visit moment_path(empty_moment)
     expect(empty_moment.art).to be_nil
-    click_button "Claim this moment's art?"
+    click_button "Claim this moment's art"
     expect(page).to have_content("claimed")
     empty_moment.reload
     expect(empty_moment.art).to be_an(Art)

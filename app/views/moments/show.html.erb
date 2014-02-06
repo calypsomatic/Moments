@@ -15,7 +15,7 @@
   <%= @moment.sentence %>
 </p>
 
-<% if @moment.art.present? %>
+<% if @moment.art.id.present? %>
   <p>This moment has an art</p>
   <% elsif !viewing_own_moment %>
     <%= simple_form_for [@moment, @art] do |form| %>

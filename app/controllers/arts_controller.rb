@@ -30,9 +30,10 @@ class ArtsController < ApplicationController
   # POST /arts
   # POST /arts.json
   def create
-    @art = Art.new(art_params)
-    @moment = @art.moment
+    @moment = Moment.find(params[:moment_id])
+    @art = Art.new(moment: @moment, user: current_user)
     @in_progress = Art.in_progress?(current_user)
+    #binding.pry
 
     respond_to do |format|
       if @in_progress

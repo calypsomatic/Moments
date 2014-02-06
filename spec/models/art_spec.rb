@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Art do
   it { should belong_to(:moment) }
   it { should belong_to(:user) }
+  it { should validate_presence_of(:user) }
+  it { should validate_presence_of(:moment) }
 
   it "returns true if currently in progress" do
     user = FactoryGirl.create(:user)

@@ -1,5 +1,5 @@
 
-<%= link_to "Previous month", moments_path(date: @cal_days.first.date.prev_month) %>
+<%= link_to "Previous month", moments_universal_path(date: @cal_days.first.date.prev_month) %>
 
 <h3>Universal Calendar</h3>
 <div class="calendar">
@@ -44,7 +44,7 @@
       <% if calDay.moments.present? %>
         <% calDay.moments.each do |moment| %>
           <class="sentence"><%= link_to "%{moment}" % {:moment => moment.sentence}, moment_path(moment) %>
-          <% if not moment.art_claimed? and moment.user_id != current_user.id %>
+          <% if not moment.art.present? and moment.user_id != current_user.id %>
             <%= link_to "artify this moment", moment_path(moment) %>
           <% end %>
         <% end %>
@@ -60,7 +60,7 @@
   </div>
 </div>
 
-<%= link_to "Next month", moments_path(date: @cal_days.first.date.next_month) %>
+<%= link_to "Next month", moments_universal_path(date: @cal_days.first.date.next_month) %>
 <p></p>
 <%= link_to "Add today's moment", new_moment_path(date: Date.today) %>
 <%= link_to "View personal calendar", moments_path(date: @cal_days.first.date) %>

@@ -3,6 +3,9 @@ class Art < ActiveRecord::Base
   belongs_to :user
   mount_uploader :grabby, GrabbyUploader
 
+  validates :user, presence: true
+  validates :moment, presence: true
+
   class << self
     def in_progress? (user)
       arts = Art.where(user: user)

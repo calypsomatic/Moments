@@ -13,6 +13,10 @@ FactoryGirl.define do
 
   factory :art do
     user
-    moment_id 1
+    moment
+
+    trait :has_image do
+      grabby Rack::Test::UploadedFile.new("#{Rails.root}/spec/fixtures/test_pic.jpg")
+    end
   end
 end
